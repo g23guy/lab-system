@@ -1,0 +1,41 @@
+#!/bin/bash
+
+DB_SERVER="wssarch.lab.novell.com"
+DB_URL="http://${DB_SERVER}/wsslab"
+DB_USER="root"
+DB_PASS="rootmysql"
+DB_NAME="wsslab"
+DB_TABLE="servers"
+DB_DATE=$(date +%Y-%m-%d)
+DB_OVERDUE="/tmp/overdue-resources.$DB_DATE"
+EMAIL_DOMAIN="novell.com"
+OVERDUE=0
+
+echo "SELECT id,server,owner,due_date FROM servers WHERE 0 < due_date AND due_date < CURDATE();" | mysql -b -u $DB_USER -p$DB_PASS -D $DB_NAME | sed -e '/^id/d' > $DB_OVERDUE
+
+while read ID SERVER OWNER DUE_DATE
+do
+	EMAIL="$(echo $OWNER | cut -d_ -f1 | tr [A-Z] [a-z])@${EMAIL_DOMAIN}"
+mail -s "Lab Resource Overdue: $SERVER" $EMAIL << EOFM
+Assigned:	$OWNER
+Resource:	$SERVER
+Date:	$DB_DATE
+Due Date:	$DUE_DATE
+
+RELEASE:
+If you are finished with the resource, click below.
+${DB_URL}/notice-clear.php?Resource=$ID&Assigned=$OWNER
+
+EXTEND:
+If you would like to extend the resource for a week, click below.
+${DB_URL}/notice-extend.php?Resource=$ID
+
+WSS Linux Lab Resource
+Database Notification
+${DB_URL}/
+
+EOFM
+	(( OVERDUE++ ))
+done < $DB_OVERDUE
+#echo Overdue=$OVERDUE
+exit 0

@@ -1,0 +1,30 @@
+#!/bin/bash
+
+clear
+DATE=$(date +%y%m%d_%H%M)
+TBALL="wsslab-${DATE}.tbz"
+cd /srv/www/htdocs
+./wsslab/install/db-export.sh
+
+printf "Fixing ownership... "
+chown -R mysql:www wsslab
+echo Done
+printf "Fixing permissions... "
+chmod -R 640 wsslab
+chmod 644 wsslab/install/servers*port.mysql
+chmod 750 wsslab wsslab/bin wsslab/install wsslab/images
+chmod 750 wsslab/bin/* wsslab/install/db-*sh
+echo Done
+echo
+
+printf "Backing up files... "
+tar jcf $TBALL wsslab/*
+echo Done
+
+echo
+for i in jrecord1 jrecord2
+do
+	printf "scp $TBALL -> ${i}, "
+	scp $TBALL ${i}:
+done
+echo

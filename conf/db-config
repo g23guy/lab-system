@@ -1,0 +1,9 @@
+DB_USER="root"
+DB_PASS="linux"
+DB_NAME="LabSystem"
+DB_TABLE="servers"
+
+DB_CFILE="/srv/www/htdocs/checkout/install/db-wsslab.mysql"
+DB_XFILE="/srv/www/htdocs/checkout/install/servers.export.mysql"
+DB_IFILE="/srv/www/htdocs/checkout/install/servers.import.mysql"
+
