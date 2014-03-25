@@ -16,11 +16,13 @@ Group:        Productivity/Databases/Tools
 License:      GPL-2.0
 Autoreqprov:  on
 Version:      0.1
-Release:      1
+Release:      6
 Source:       %{name}-%{version}.tar.gz
 BuildRoot:    %{_tmppath}/%{name}-%{version}
 Buildarch:    noarch
-Requires:     php5
+Requires:     php
+Requires:     apache, mod_php_any, php-bz2 php-mbstring php-mcrypt php-mysql php-zip
+Requires:     /usr/sbin/mysqld
 
 %description
 A simple lab machine check out system.
@@ -45,7 +47,8 @@ install -d $RPM_BUILD_ROOT/usr/share/doc/packages/%{labname}
 install -d $RPM_BUILD_ROOT/var/spool/%{labname}
 install -d $RPM_BUILD_ROOT/srv/www/htdocs/%{webname}/images
 install -m 644 conf/* $RPM_BUILD_ROOT/etc/opt/%{labname}
-install -m 444 man/COPYING.GPLv2 $RPM_BUILD_ROOT/usr/share/doc/packages/%{labname}
+install -m 444 man/LICENSE $RPM_BUILD_ROOT/usr/share/doc/packages/%{labname}
+install -m 444 man/README $RPM_BUILD_ROOT/usr/share/doc/packages/%{labname}
 install -m 444 schema/* $RPM_BUILD_ROOT/usr/share/doc/packages/%{labname}
 install -m 755 bin/* $RPM_BUILD_ROOT/opt/%{labname}/bin
 install -m 644 web/* $RPM_BUILD_ROOT/srv/www/htdocs/%{webname}

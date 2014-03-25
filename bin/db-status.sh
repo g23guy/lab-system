@@ -1,6 +1,6 @@
 #!/bin/bash
 
-. /srv/www/htdocs/wsslab/install/db-config
+. /etc/opt/labsystem/db-config
 
 clear
 printf "User: $DB_USER  "

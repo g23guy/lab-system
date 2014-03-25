@@ -1,6 +1,6 @@
-CREATE DATABASE wsslab;
-USE wsslab;
-CREATE TABLE servers ( id INT AUTO_INCREMENT PRIMARY KEY, server VARCHAR(30), ip_pri VARCHAR(16), ip_sec VARCHAR(16), ip_drac VARCHAR(16), owner VARCHAR(45), make VARCHAR(30), model VARCHAR(30), asset_tag VARCHAR(30), service_num VARCHAR(30), firmware VARCHAR(45), arch VARCHAR(10), memory VARCHAR(15), disks VARCHAR(30), fibre VARCHAR(30), cpu VARCHAR(30), static_config int, static_part VARCHAR(45), static_os VARCHAR(15), misc VARCHAR(225), location VARCHAR(15), status VARCHAR(15), due_date DATE, state BOOLEAN, test_os VARCHAR(15) );
+CREATE DATABASE LabSystem;
+USE LabSystem;
+CREATE TABLE Servers ( id INT AUTO_INCREMENT PRIMARY KEY, server VARCHAR(30), ip_pri VARCHAR(16), ip_sec VARCHAR(16), ip_drac VARCHAR(16), owner VARCHAR(45), make VARCHAR(30), model VARCHAR(30), asset_tag VARCHAR(30), service_num VARCHAR(30), firmware VARCHAR(45), arch VARCHAR(10), memory VARCHAR(15), disks VARCHAR(30), fibre VARCHAR(30), cpu VARCHAR(30), static_config int, static_part VARCHAR(45), static_os VARCHAR(15), misc VARCHAR(225), location VARCHAR(15), status VARCHAR(15), due_date DATE, state BOOLEAN, test_os VARCHAR(15) );
 SHOW DATABASES;
 SHOW TABLES;
-DESCRIBE servers;
+DESCRIBE Servers;

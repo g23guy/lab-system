@@ -1,11 +1,9 @@
 #!/bin/bash
 
+. /etc/opt/labsystem/db-config
+
 DB_SERVER="wssarch.lab.novell.com"
 DB_URL="http://${DB_SERVER}/wsslab"
-DB_USER="root"
-DB_PASS="rootmysql"
-DB_NAME="wsslab"
-DB_TABLE="servers"
 DB_DATE=$(date +%Y-%m-%d)
 DB_OVERDUE="/tmp/overdue-resources.$DB_DATE"
 EMAIL_DOMAIN="novell.com"

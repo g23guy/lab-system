@@ -1,0 +1,25 @@
+lab-system
+==========
+
+Check-out System for Lab Machines
+
+Installation
+============
+
+1. Copy the lab-system-*noarch.rpm package to the server.
+2. Run zypper in lab-system-*noarch.rpm
+3. Turn on required services:
+3.1  chkconfig mysql on
+3.2  chkconfig apache2 on
+4. Start the required services:
+4.1  /etc/init.d/mysql start
+4.2  /etc/init.d/apache2 start
+5. Set the MySQL root password:
+5.1  Run mysql_secure_installation to define the root password and accept default prompts
+5.2  Set the root password to linux
+5.3  If you use a different password than linux, edit the /etc/opt/labsystem/db-config and /srv/www/htdocs/lab/db-config.php files with the correct MySQL root password.
+6. Run /opt/labsystem/bin/db-create.sh
+7. Run /etc/init.d/apache2 restart
+8. Access the lab system with the URL http://server/lab
+
+
